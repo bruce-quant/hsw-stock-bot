@@ -1,0 +1,26 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local data and the bot's private files (never commit these)
+data/
+logs/
+state/
+.env
+.env.*
+!.env.example
+# the kill switch, in any case and with any extension (STOP, stop.txt, ...)
+/[Ss][Tt][Oo][Pp]
+/[Ss][Tt][Oo][Pp].*
+
+# Editors and systems
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,17 @@
+{
+  "my_strategy": {
+    "final_equity": 4570.050620241322,
+    "first_trade_pnl": -172.9875856348774,
+    "trades": 89.0
+  },
+  "steady": {
+    "final_equity": 10076.657644193068,
+    "first_trade_pnl": 51.319510119586994,
+    "trades": 11.0
+  },
+  "swing": {
+    "final_equity": 9638.199602486877,
+    "first_trade_pnl": -129.20092832216926,
+    "trades": 9.0
+  }
+}

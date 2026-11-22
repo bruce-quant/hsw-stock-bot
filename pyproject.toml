@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hsw-stock-bot"
+version = "1.0.0"
+description = "A small, honest stock swing trading bot you can read, test and run on an Alpaca paper account."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "HSW Trading" }]
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Education",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+# Minimum versions. requirements.txt pins the exact versions we tested with.
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "yfinance>=0.2.50",
+    "matplotlib>=3.8",
+    "alpaca-py>=0.30",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11", "pandas-stubs>=2.2", "types-requests>=2.31"]
+
+[project.scripts]
+hsw-bot = "hsw_bot.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hsw_bot*"]
+
+# ---------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = [".venv", "data", "logs", "state"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F",   # pycodestyle and pyflakes: real errors and style
+    "I",             # sorted imports
+    "B",             # bugbear: likely bugs
+    "UP",            # modern Python syntax
+    "SIM",           # simpler code
+    "N",             # naming
+    "C4",            # comprehensions
+    "RET",           # return statements
+    "PTH",           # pathlib instead of os.path
+    "RUF",           # ruff's own checks
+    "PLR2004",       # no magic numbers in comparisons
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLR2004"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["hsw_bot", "tests"]
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = ["yfinance", "yfinance.*"]
+ignore_missing_imports = true
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
